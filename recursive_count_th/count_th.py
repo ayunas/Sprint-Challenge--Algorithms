@@ -38,16 +38,14 @@ def count_th(word):
     if 'th' in word:
         word_arr = split_word(word)
         print('word array', word_arr)
-        # word_arr = filter(word_arr,lambda w : w == 't')
-        # for w in word_arr:
-        # clear_th = list(filter(lambda w: w != 't' and w != 'h', word_arr))  #pblm: this removes ALL the th's in the word
-        # cleared_th = remove_th(word_arr)
+
         cleared_th = remove_th(word_arr)
+        return 1 + count_th(cleared_th)
+        
+        # clear_th = list(filter(lambda w: w != 't' and w != 'h', word_arr))  #pblm: this removes ALL the th's in the word
         # print('cleared th word: ', cleared_th)
         # print('filtered', clear_th)
-        # new_word = join_word(cleared_th)
         # print('new word', new_word)
-        return 1 + count_th(cleared_th)
     else:
         return 0
 
