@@ -96,8 +96,57 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        self.robot_bubbles()
+        
+
+    def restart(self):
+        self._position = 0
+
+    def check_position(self):
+        # print('check triggered')
+        # print(self._position)
+        return self._position
+    
+    def item_check(self):
+        return self._list[self.check_position()]
+    
+    def robot_item(self):
+        return self._item
+    
+    def robot_bubbles(self):
+        self.swap_item()
+        print('robot picked up: ', self.robot_item())
+
+        while self.can_move_right():
+            # print('robot currently has: ', self.robot_item())
+            # print('item on the belt: ', self.item_check())
+            self.move_right()
+            print('moved to position: ', self.check_position())
+
+            if self.compare_item() == 1:  #robot item is > than belt item
+                print('item on the belt: ', self.item_check())
+                self.swap_item()
+                print('swapped item!', self.item_check(), 'for ', self.robot_item())
+                self.move_left()
+                print('robot stepped back to swap')
+                self.swap_item()
+                print('swapped item again with previous', self.item_check(), 'for ', self.robot_item())
+                if not self.light_is_on():
+                    self.set_light_on()
+                    print('robot turned on his swap alert light.')
+                   
+                self.move_right()
+                self.move_right()
+                print('Robot stepped ahead two steps to continue')
+
+                print('robot currently has: ', self.robot_item())
+                print('item on the belt: ', self.item_check())
+                print('current position: ', self.check_position())
+            else:
+                pass #continue back to the top of the while loop
+        
+        print('robot has reached the end of the aseembly belt')
+                
 
 
 if __name__ == "__main__":
@@ -109,4 +158,36 @@ if __name__ == "__main__":
     robot = SortingRobot(l)
 
     robot.sort()
-    print(robot._list)
+
+    # print(robot._list)
+
+##TODO UPER:
+# Understand: 
+# because the robot cannot jump to different parts of the list, so easily, need a sequential sorting algorithm.
+# cannot access self.position, so will use the move helper methods to shift the robot.  
+# to minimize the movement of the robot, bubble sort will be selected.  it is a robot after all, so whenever it gets to the end of the list (call it assembly line) it will "robotically" go back to the beginning of the line and compare adjacent items again until it goes through the entire assembly line, and not making any more swaps. 
+# 
+# Planning:
+# Bubble sort algorithm, moving the robot using the predefined methods.
+# define a new method "restart" which pushes the robot back to the beginning of the assembly line.
+# have the robot keep track of the swaps made using the set_light_on.  only 1 swap is required to restart on the line
+# (how to keep track of position wehre nothing is there?)
+
+# pseudocode:
+# 1. check to see the robot is at the beginning of the line.  if the can move left returns false, the robot is at the starting point.  
+# 2. swap_item to pick up the first item.  none for item #0.  set pickup_point = robot-none <=> item,  drop_off robot-item <=> none
+# 3. move right
+# 4. compare_item. if the value is -1, swap the item because it is less.  keep track of the position swap_point = item <=> item
+# 5. else keep going till value is -1.  go to step 8 for logical next step.
+# 5. move left and swap item with none. set the drop_off_point.    
+# 6. move back to the swap_point
+# 7. swap_item to pick it up.  now none is in it's place.  
+#(need to keep track of current position that has none in it.)
+#8. keep moving to the right and compare_item until -1 is returned. then swap_item and move left to where the item has Nothing there.  (pickup_point) (how to keep track of position wehre nothing is there?)
+# 9. when robot reaches end of line, if light is on.  light will be on when swap_count has reached two.  (1st swap count doesn't count because not accounting for pickinp up 1st item.  
+# )
+#/ *** how to distinguish between drop_off and pickup_points ? 
+
+# pickup = robot-none <=> item in assembly line
+# dropoff = robot-item <=> none in assembly line
+# swap_point robot-item <=> item in assembly line 

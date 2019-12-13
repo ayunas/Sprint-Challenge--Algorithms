@@ -21,11 +21,11 @@ def join_word(word_arr):
 
 def remove_th(word_arr):
     word = join_word(word_arr)
-    print('word in remove_th', word)
+    print('word in remove_th', word, 'char length:', len(word))
     print('word index of th', word.index('th'))
     th_i = word.index('th')
     word = word[:th_i] + word[th_i + 2:]
-    # print('after slicing word', word)
+    print('after slicing word', word, 'char length:', len(word))  ##BUG after slicing, another th appeared in sequence, so counted extra
     return word
 
 def count_th(word):
@@ -37,7 +37,7 @@ def count_th(word):
     
     if 'th' in word:
         word_arr = split_word(word)
-        print('word array', word_arr)
+        print('word array of th_word', word_arr)
 
         cleared_th = remove_th(word_arr)
         return 1 + count_th(cleared_th)
@@ -49,7 +49,10 @@ def count_th(word):
     else:
         return 0
 
-print(count_th('health'))
+word = 'thhtthht'
+print('word length', len(word))
+
+print(count_th(word))
 
 
 
@@ -73,5 +76,5 @@ print(count_th('health'))
 #     return th_count
 
 
-# count_th_iterative('thalth')
+count_th_iterative('thalth')
 

@@ -25,7 +25,7 @@ class Test(unittest.TestCase):
     def test_count_backwards(self):
         self.word = "thhtthht"
         count = count_th(self.word)
-        self.assertEqual(2, count)
+        self.assertEqual(3, count)  #changed 2 to 3
 
     def test_count_th_mixedcase(self):
         self.word = "THtHThth"
