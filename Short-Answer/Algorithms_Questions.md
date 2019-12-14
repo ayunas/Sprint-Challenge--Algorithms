@@ -10,6 +10,9 @@ a)  a = 0
     while (a < n * n * n):
       a = a + n * n
 ```
+<h4>O(n^3)</h4>
+the big O = O(n^3).  This is because for any given input size n, the amount of operations to be performed will be n^3.
+so if n = 2.  a total of 2^3 operations will be performed.  the operation in this example is calculating a + n * n and setting that back to a incrementally.
 
 
 
@@ -21,6 +24,9 @@ b)  sum = 0
         j *= 2
         sum += 1
 ```
+<h4>O(2n^2)</h4>
+the big O time complexity is O(2n^2).  This is because for any given input n, there are n operations performed, and for each n operation, another 2n operations are performed.  The for loop will be for the 1st n operations.  and the nested while loop will be n operations for each of the for loops n operations.  And the nested while loop is doing 2 operations per n, making it a total of O(2n^2) ~ O(n^2).  In the outer for loop, the operation is setting j = 1 and then for each iteration of the for loop, the while loop will carry out a total of n times, performing the 2 calculations of j = j * 2 and sum = sum + 1
+
 
 ```
 c)  def bunnyEars(bunnies):
@@ -29,6 +35,9 @@ c)  def bunnyEars(bunnies):
 
       return 2 + bunnyEars(bunnies-1)
 ```
+<h4>O(n)</h4>
+the big O for this simple recursive function is simply ~ O(n).  this is because for a given input of n, the function will perform ~ n function calls, considered an operation.  when it hits the base case of n = 0, it will return 0.  
+
 
 ## Exercise II
 
