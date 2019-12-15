@@ -96,92 +96,8 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        swapped = 0
-        while True:
-            swapped = self.robot_bubbles()
-            # print('swapped ? ', swapped)
-            self.restart()
-            # print('updated list', self._list)
-            if swapped == 0:
-                break
-
-
-
-    def restart(self):
-        self._position = 0
-
-    def check_position(self):
-        # print('check triggered')
-        # print(self._position)
-        return self._position
-    
-    def item_check(self):
-        return self._list[self.check_position()]
-    
-    def robot_item(self):
-        return self._item
-    
-    def robot_bubbles(self):
-        old_list = [*self._list]
-        # print('old_list', self._list)
-        swap_count = 0
-        # print('item on the assembly belt before robot initial pick up: ', self.item_check())
-        # print('position of robot', self.check_position())
-        # self.swap_item()
-        # print('robot picked up: ', self.robot_item())
-        # print('on the assembly belt after pickup: ', self.item_check())
-
-        while self.can_move_right():
-            # print('robot item: ', self.robot_item(), 'belt item: ', self.item_check())
-            if self.robot_item() == None:
-                 self.swap_item()
-                #  print('robot had nothing and picked up: ', self.robot_item())
-                 self.move_right()
-                #  print('moved to position: ', self.check_position())
-            
-            # print('robot currently has: ', self.robot_item())
-            # print('item on the belt: ', self.item_check())
-            
-
-            if self.compare_item() == 1:  #robot item is > than belt item
-                # print('robot item > belt item')
-                # print('robot item: ', self.robot_item(), 'belt item: ', self.item_check())
-                self.swap_item()
-                # print('swapped item!', self.item_check(), 'for ', self.robot_item())
-                self.move_left()
-                # print('robot stepped back to swap')
-                self.swap_item()  
-                # print('swapped item again with previous', self.item_check(), 'for ', self.robot_item())
-                if not self.light_is_on():
-                    self.set_light_on()
-                    # print('robot turned on his swap alert light.')
-                swap_count = swap_count + 1
-                self.move_right()
-                # self.move_right()
-                # print('Robot stepped ahead two steps to continue')
-
-                # print('robot currently has: ', self.robot_item())
-                # print('item on the belt: ', self.item_check())
-                # print('current position: ', self.check_position())
-            else: 
-                # print('robot item <= belt item. step back 1')
-                # print('robot item: ', self.robot_item(), 'belt item: ', self.item_check())
-                self.move_left()
-                self.swap_item()  #put back the item picked up since it wasn't greater than the 2nd of the pair.
-                # print('robot went back and replaced the item: ', self.item_check(), 'in position: ', self.check_position())
-                self.move_right()
-                # self.move_right()
-                pass #go to next iteration of while loop
         
-        # print('robot has reached the end of the aseembly belt')
-        new_list = self._list
-        # print('\noldlist', old_list)
-        # print('\nnewlist', new_list)
-        self.set_light_off()
-        return swap_count
-        
-
-                
+        pass
 
 
 if __name__ == "__main__":
@@ -193,8 +109,7 @@ if __name__ == "__main__":
     robot = SortingRobot(l)
 
     robot.sort()
-
-    # print(robot._list)
+    print(robot._list)
 
 ##TODO UPER:
 # Understand: 
